@@ -1,0 +1,76 @@
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-4">
+        <h2 class="">{{phoneBook.name}}</h2>
+        <div class="">
+            <button (click)="addNewContact()" class="btn btn-success btn-xs">Add new contact </button>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="input-group">
+            <input (ngModelChange)='onFilterChanged($event)' [(ngModel)]='SearchText' type="text"
+                placeholder="Search phone book " class="input form-control">
+            <span class="input-group-append">
+                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Search</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div *ngIf="this.phoneBook.contacts && this.phoneBook.contacts.length > 0" class="row">
+        <div *ngFor="let item of this.phoneBook.contacts" class="col-lg-4">
+            <div *ngIf="!item.edit" class="contact-box">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="contact-name"><strong>{{item.name}}</strong></h3>
+                        <address>
+                            <abbr title="Phone"></abbr>{{item.phoneNumber}}
+                        </address>
+                    </div>
+                </div>
+                <div class="">
+                    <button (click)="editContact(item)" class="btn btn-primary btn-xs">Edit </button>
+                    <button *ngIf="item.id" (click)="deletteContact(item)" class="btn btn-danger btn-xs">Delete </button>
+                </div>
+            </div>
+            <div *ngIf="item.edit" class="contact-box">
+                <div class="row">
+                    <div class="col-12">
+                    <form [formGroup]="contactForm">
+                        <div class="form-group">
+                            <input [(ngModel)]="item.name" placeholder="Name"  type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': contactForm.controls.name.errors }" />
+                            <div *ngIf="contactForm.controls.name.errors" class="invalid-feedback">
+                                <div *ngIf="contactForm.controls.name.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input [(ngModel)]="item.phoneNumber" placeholder="Phone number" type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{ 'is-invalid': contactForm.controls.phoneNumber.errors }" />
+                            <div *ngIf="contactForm.controls.phoneNumber.errors" class="invalid-feedback">
+                                <div *ngIf="contactForm.controls.phoneNumber.errors.required">Phone number is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group pt-4">
+                          <button [disabled]="contactForm.invalid" *ngIf="!item.isNew" (click)="saveUpdates(item)" class="btn btn-primary btn-xs">Save </button>
+                          <button [disabled]="contactForm.invalid" *ngIf="item.isNew" (click)="saveNewContact(item)" class="btn btn-primary btn-xs">Save </button>
+                      </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf=" this.phoneBook.contacts && this.phoneBook.contacts.length === 0" class="row">
+        <div class="col-11">
+            <div  class="contact-box">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="contact-name"><strong>There are no contacts in your phone book.You may start adding contacts</strong></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

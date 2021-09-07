@@ -1,0 +1,32 @@
+
+<div *ngIf="noPhoneBooks" class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-8">
+      <h2 class="">You do not have any phone books</h2>
+      <div class="">
+          <button (click)="addPhoneBook()" class="btn btn-success btn-xs">Add new phone book </button>
+      </div>
+  </div>
+  <div *ngIf="addnew" class="contact-box">
+    <div class="row">
+        <div class="col-12">
+        <form [formGroup]="phoneBookForm">
+            <div class="form-group">
+                <input placeholder="Phone book title"  type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': phoneBookForm.controls.name.errors }" />
+                <div *ngIf="phoneBookForm.controls.name.errors" class="invalid-feedback">
+                    <div *ngIf="phoneBookForm.controls.name.errors.required">Phone book title is required</div>
+                </div>
+            </div>
+            <div class="form-group pt-4">
+              <button [disabled]="phoneBookForm.invalid" (click)="savePhoneBook()" class="btn btn-primary btn-xs">Save </button>
+          </div>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+<div *ngIf="!noPhoneBooks">
+  <div  *ngFor="let item of PhoneBooks">
+    <app-phonebook [phoneBook]="item"></app-phonebook>
+    </div>
+</div>
+
