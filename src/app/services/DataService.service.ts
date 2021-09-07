@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DataServiceService {
+export class DataService {
   public pageSize: number;
   public baseUri: string;
   constructor(public httpClient: HttpClient) {

@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Contact } from './../dtos/contact';
 import { Constants } from './../utilities/constants';
 import { Injectable } from '@angular/core';
-import { DataServiceService } from './DataServiceService';
+import { DataService } from './DataService.service';
 import { PhoneBook } from '../dtos/phoneBook';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class ContactsService {
   private deleteContactEndPoint: string = Constants.ServerURL + '/api/contact';
   private updateContactEndPoint: string = Constants.ServerURL + '/api/contact/updateContact';
   private addPhoneBookEndPoint: string = Constants.ServerURL + '/api/contact/addNewPhoneBook';
-  constructor(public dataService: DataServiceService) { }
+  constructor(public dataService: DataService) { }
 
 
   addPhoneBook(newContact: any): Observable<any> {

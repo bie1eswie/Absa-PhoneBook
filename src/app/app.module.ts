@@ -1,4 +1,4 @@
-import { DataServiceService } from './services/DataServiceService';
+import { DataService } from './services/DataService.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppviewsModule,
     HttpClientModule,
   ],
-  providers:  [DataServiceService,
+  providers:  [DataService,
     {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
