@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   getPhoneBooks(): void {
     this.contactService.getAllContacts()
       .subscribe((res: any) => {
-        this.PhoneBooks = res.result.result;
+        this.PhoneBooks = res.result;
         this.noPhoneBooks = this.PhoneBooks.length == 0;
       });
     }

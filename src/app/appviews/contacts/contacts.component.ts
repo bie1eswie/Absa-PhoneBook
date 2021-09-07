@@ -45,6 +45,8 @@ export class ContactsComponent implements OnInit {
     editContact(contact: Contact): void {
       contact.edit = !contact.edit;
       this.contactForm.markAllAsTouched();
+      this.contactForm.controls.name.setValue(contact.name);
+      this.contactForm.controls.phoneNumber.setValue(contact.phoneNumber);
     }
 
     saveUpdates(contact: Contact): void{
